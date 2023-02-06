@@ -7,9 +7,17 @@ variable "aws" {
   sensitive = true
 }
 
+variable "confluent" {
+  type = object({
+    cloud_api_key    = string
+    cloud_api_secret = string
+  })
+  sensitive = true
+}
+
 variable "kafka_api_credentials" {
   type = object({
-    api_key_id = string
+    api_key_id     = string
     api_key_secret = string
   })
   sensitive = true
@@ -21,15 +29,10 @@ variable "kafka" {
       id = string
     })
     cluster = object({
-      id = string
-      api_version = string
-      kind = string
+      id            = string
+      api_version   = string
+      kind          = string
       rest_endpoint = string
     })
   })
-}
-
-variable "s3_bucket" {
-  type = string
-  description = "Name of the S3 bucket where topic data should be stored"
 }

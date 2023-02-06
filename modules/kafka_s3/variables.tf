@@ -8,6 +8,7 @@ variable "aws" {
     access_key = string
     secret_key = string
   })
+  sensitive = true
 }
 
 variable "kafka_api_credentials" {
@@ -15,6 +16,7 @@ variable "kafka_api_credentials" {
     api_key_id = string
     api_key_secret = string
   })
+  sensitive = true
 }
 
 variable "kafka" {

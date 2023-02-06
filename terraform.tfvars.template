@@ -1,0 +1,24 @@
+aws = {
+  region     = "AWS_REGION"
+  access_key = "AWS_ACCESS_KEY"
+  secret_key = "AWS_SECRET_KEY"
+}
+
+kafka_api_credentials = {
+  api_key_id     = "KAFKA_KEY_ID"     # optionally use CONFLUENT_CLOUD_API_KEY env var
+  api_key_secret = "KAFKA_KEY_SECRET" # optionally use CONFLUENT_CLOUD_API_SECRET env var
+}
+
+kafka = {
+  environment = {
+    id = "KAFKA_ENVIRONMENT_ID"
+  }
+  cluster = {
+    id            = "KAFKA_CLUSTER_ID"
+    api_version   = "KAFKA_CLUSTER_API_VERSION"
+    kind          = "KAFKA_CLUSTER_KIND"
+    rest_endpoint = "KAFKA_CLUSTER_REST_ENDPOINT"
+  }
+}
+
+s3_bucket = "S3_BUCKET_NAME"

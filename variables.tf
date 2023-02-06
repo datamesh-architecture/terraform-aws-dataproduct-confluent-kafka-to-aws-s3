@@ -36,3 +36,29 @@ variable "kafka" {
     })
   })
 }
+
+variable "glue_catalog_database" {
+  type = object({
+    name       = string
+    catalog_id = string
+  })
+}
+
+variable "domain" {
+  type = string
+  description = "The domain of the data product"
+}
+
+variable "name" {
+  type = string
+  description = "The name of the data product"
+}
+
+variable "input" {
+  type = list(object({
+    topic      = string
+    format     = string
+    table_name = string
+    schema     = string
+  }))
+}

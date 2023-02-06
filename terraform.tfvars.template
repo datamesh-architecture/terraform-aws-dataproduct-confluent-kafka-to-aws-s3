@@ -26,4 +26,7 @@ kafka = {
   }
 }
 
-s3_bucket = "S3_BUCKET_NAME"
+glue_catalog_database = {
+  name       = "GLUE_CATALOG_NAME"
+  catalog_id = "GLUE_CATALOG_ID"
+}

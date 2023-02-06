@@ -22,7 +22,7 @@ resource "aws_glue_catalog_table" "aws_glue_catalog_table_kafka" {
   }
 
   storage_descriptor {
-    location      = var.product.input[count.index].source
+    location      = var.product.input[count.index].topic
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 

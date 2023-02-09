@@ -10,8 +10,8 @@ resource "aws_glue_schema" "aws_glue_schema" {
 resource "aws_glue_catalog_table" "aws_glue_catalog_table_kafka" {
   count = length(var.product.input)
 
-  database_name = var.glue_catalog_database.name
-  catalog_id    = var.glue_catalog_database.catalog_id
+  database_name = var.aws_glue.database_name
+  catalog_id    = var.aws_glue.catalog_id
   name          = replace(var.product.input[count.index].table_name, "-", "_")
   description   = "Glue catalog table"
   table_type    = "EXTERNAL_TABLE"
@@ -22,7 +22,7 @@ resource "aws_glue_catalog_table" "aws_glue_catalog_table_kafka" {
   }
 
   storage_descriptor {
-    location      = var.product.input[count.index].topic
+    location      = "s3://${var.s3_bucket.id}/topics/${var.product.input[count.index].topic}"
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 

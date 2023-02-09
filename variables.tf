@@ -37,10 +37,17 @@ variable "kafka" {
   })
 }
 
-variable "glue_catalog_database" {
+variable "aws_athena" {
   type = object({
-    name       = string
-    catalog_id = string
+    workgroup_name = string
+    catalog_name   = string
+  })
+}
+
+variable "aws_glue" {
+  type = object({
+    database_name  = string
+    catalog_id     = string
   })
 }
 

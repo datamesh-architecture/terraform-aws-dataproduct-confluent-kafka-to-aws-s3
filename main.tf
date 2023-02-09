@@ -2,7 +2,7 @@ locals {
   product_fqn = replace("${var.domain}-${var.name}", "_", "-")
 }
 
-module "s3_bucket" {
+module "aws_s3" {
   source = "./modules/aws_s3"
   s3_bucket_name = local.product_fqn
 }
@@ -10,24 +10,39 @@ module "s3_bucket" {
 module "confluent_kafka_to_s3" {
   source = "./modules/confluent_kafka_s3"
 
-  /* credentials required for the module */
   aws                   = var.aws
   kafka_api_credentials = var.kafka_api_credentials
   kafka                 = var.kafka
-
-  s3_bucket             = module.s3_bucket.s3_bucket.bucket
+  s3_bucket             = module.aws_s3.s3_bucket.bucket
   kafka_topics          = [ for input in var.input: input.topic ]
 
-  depends_on = [ module.s3_bucket ]
+  depends_on = [ module.aws_s3 ]
 }
 
-module "athena_glue" {
+module "aws_athena_glue" {
   source = "./modules/aws_athena_glue"
 
-  glue_catalog_database = var.glue_catalog_database
+  aws_glue  = var.aws_glue
+  s3_bucket = module.aws_s3.s3_bucket
+
+  product  = {
+    fqn    = local.product_fqn
+    input  = var.input
+  }
+}
+
+module "aws_lambda" {
+  source = "./modules/aws_lambda"
+
+  s3_bucket  = module.aws_s3.s3_bucket
+  aws_athena = var.aws_athena
+  aws_glue   = {
+    database_name  = var.aws_glue.database_name
+    catalog_tables = module.aws_athena_glue.aws_glue_catalog_tables
+  }
 
   product = {
-    fqn   = local.product_fqn
-    input = var.input
+    domain = var.domain
+    name   = var.name
   }
 }

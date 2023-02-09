@@ -1,0 +1,11 @@
+module.exports.handler = async (event) => {
+    let responseMessage = '${response_message}';
+
+    return {
+        statusCode: 200,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: responseMessage,
+    }
+}

@@ -68,4 +68,10 @@ variable "input" {
     table_name = string
     schema     = string
   }))
+  description = <<EOT
+topic: Name of the Kafka topic which should be processed
+format: Currently only 'JSON' is supported
+table_name: Name of the (data catalog) table, where data is stored
+schema: Path to the schema which describes the messages received from Kafka
+EOT
 }

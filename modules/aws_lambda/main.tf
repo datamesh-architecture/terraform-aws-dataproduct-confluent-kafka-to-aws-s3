@@ -8,16 +8,13 @@ locals {
 resource "local_file" "lambda_info_to_s3" {
   content = templatefile("${path.module}/templates/info.js.tftpl", {
     response_message = jsonencode({
-      domain        = var.product.domain
-      name          = var.product.name
-      location      = var.s3_bucket.arn
-      athena        = {
-        workgroup = var.aws_athena.workgroup_name
-        catalog   = var.aws_athena.catalog_name
-      }
-      glue          = {
-        database  = var.aws_glue.database_name
-        tables    = var.aws_glue.catalog_tables
+      domain = var.product.domain
+      name   = var.product.name
+      output = {
+        athena_catalog   = var.aws_athena.catalog_name
+        athena_workgroup = var.aws_athena.workgroup_name
+        glue_database    = var.aws_glue.database_name
+        location         = var.s3_bucket.arn // TODO to be removed
       }
     })
   })

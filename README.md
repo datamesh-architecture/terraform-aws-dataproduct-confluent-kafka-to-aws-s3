@@ -14,8 +14,8 @@ This Terraform module provisions the necessary services to provide a data produc
 
 ## Usage
 
-```
-module "kafka_to_s3 {
+```hcl
+module "kafka_to_s3" {
   module = "git@github.com:datamesh-architecture/terraform-datamesh-dataproduct-confluent-kafka-to-aws-s3.git"
 
   domain = "<data_product_domain>"
@@ -31,6 +31,23 @@ module "kafka_to_s3 {
   output = {
     grant_access = [ "<aws_account_id>" ]
   }
+}
+```
+
+## Endpoint data
+
+The module creates an RESTful endpoint via AWS lambda (e.g. https://xz9am9uu74.execute-api.eu-central-1.amazonaws.com/prod/). This endpoint can be used as an input for another data product or to retrieve information about this data product.
+
+```json
+{
+    "domain": "data_product_domain",
+    "name": "data_product_name",
+    "output": {
+        "athena_catalog": "<athena_catalog>",
+        "athena_workgroup": "<athena_workgroup>",
+        "glue_database": "<glue_database>",
+        "location": "arn:aws:s3:::<s3_bucket_name>"
+    }
 }
 ```
 

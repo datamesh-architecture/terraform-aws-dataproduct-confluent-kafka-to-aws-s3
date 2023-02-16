@@ -75,3 +75,15 @@ table_name: Name of the (data catalog) table, where data is stored
 schema: Path to the schema which describes the messages received from Kafka
 EOT
 }
+
+variable "output" {
+  type = object({
+    grant_access = list(string)
+  })
+  default = {
+    grant_access = []
+  }
+  description = <<EOT
+grant_access: "List of AWS account ids which should have access to the data product"
+EOT
+}

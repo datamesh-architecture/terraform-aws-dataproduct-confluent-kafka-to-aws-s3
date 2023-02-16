@@ -5,6 +5,7 @@ locals {
 module "aws_s3" {
   source = "./modules/aws_s3"
   s3_bucket_name = local.product_fqn
+  aws_account_ids = var.output.grant_access
 }
 
 module "confluent_kafka_to_s3" {

@@ -2,7 +2,7 @@
 
 This Terraform module provisions the necessary services to provide a data product on AWS.
 
-![](assets/images/overview.png)
+![Overview](assets/images/overview.png)
 
 ## Services
 

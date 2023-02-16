@@ -14,16 +14,10 @@ This Terraform module provisions the necessary services to provide a data produc
 
 ## Usage
 
-
-
 ```
 module "kafka_to_s3 {
   module = "git@github.com:datamesh-architecture/terraform-datamesh-dataproduct-confluent-kafka-to-aws-s3.git"
 
-  # AWS credentials
-  # Confluent credentials
-  # Information about (existing) services (e.g. Athena workgroup, catalog name or Glue catalog)
-  
   domain = "<data_product_domain>"
   name   = "<data_product_name>"
   input  = [

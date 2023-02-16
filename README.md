@@ -40,8 +40,8 @@ The module creates an RESTful endpoint via AWS lambda (e.g. https://xz9am9uu74.e
 
 ```json
 {
-    "domain": "data_product_domain",
-    "name": "data_product_name",
+    "domain": "<data_product_domain>",
+    "name": "<data_product_name>",
     "output": {
         "athena_catalog": "<athena_catalog>",
         "athena_workgroup": "<athena_workgroup>",

@@ -16,7 +16,7 @@ This Terraform module provisions the necessary services to provide a data produc
 
 ```hcl
 module "kafka_to_s3" {
-  module = "git@github.com:datamesh-architecture/terraform-datamesh-dataproduct-confluent-kafka-to-aws-s3.git"
+  module = "git@github.com:datamesh-architecture/terraform-dataproduct-confluent-kafka-to-aws-s3.git"
 
   domain = "<data_product_domain>"
   name   = "<data_product_name>"

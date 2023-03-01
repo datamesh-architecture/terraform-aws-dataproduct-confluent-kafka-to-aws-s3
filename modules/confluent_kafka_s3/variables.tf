@@ -11,14 +11,6 @@ variable "aws" {
   sensitive = true
 }
 
-variable "kafka_api_credentials" {
-  type = object({
-    api_key_id = string
-    api_key_secret = string
-  })
-  sensitive = true
-}
-
 variable "kafka" {
   type = object({
     environment = object({
@@ -30,7 +22,12 @@ variable "kafka" {
       kind = string
       rest_endpoint = string
     })
+    credentials = object({
+      api_key_id = string
+      api_key_secret = string
+    })
   })
+  sensitive = true
 }
 
 variable "s3_bucket" {

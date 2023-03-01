@@ -38,8 +38,8 @@ resource "confluent_kafka_acl" "app-producer-write-on-topic" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -87,8 +87,8 @@ resource "confluent_kafka_acl" "app-consumer-read-on-topic" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -109,8 +109,8 @@ resource "confluent_kafka_acl" "app-consumer-read-on-group" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -132,8 +132,8 @@ resource "confluent_kafka_acl" "app-connector-describe-on-cluster" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -152,8 +152,8 @@ resource "confluent_kafka_acl" "app-connector-read-on-target-topic" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -170,8 +170,8 @@ resource "confluent_kafka_acl" "app-connector-create-on-dlq-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -188,8 +188,8 @@ resource "confluent_kafka_acl" "app-connector-write-on-dlq-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -206,8 +206,8 @@ resource "confluent_kafka_acl" "app-connector-create-on-success-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -224,8 +224,8 @@ resource "confluent_kafka_acl" "app-connector-write-on-success-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -242,8 +242,8 @@ resource "confluent_kafka_acl" "app-connector-create-on-error-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -260,8 +260,8 @@ resource "confluent_kafka_acl" "app-connector-write-on-error-lcc-topics" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 
@@ -278,8 +278,8 @@ resource "confluent_kafka_acl" "app-connector-read-on-connect-lcc-group" {
   permission    = "ALLOW"
   rest_endpoint = var.kafka.cluster.rest_endpoint
   credentials {
-    key    = var.kafka_api_credentials.api_key_id
-    secret = var.kafka_api_credentials.api_key_secret
+    key    = var.kafka.credentials.api_key_id
+    secret = var.kafka.credentials.api_key_secret
   }
 }
 

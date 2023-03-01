@@ -11,9 +11,7 @@ resource "local_file" "lambda_info_to_s3" {
       domain = var.product.domain
       name   = var.product.name
       output = {
-        athena_catalog   = var.aws_athena.catalog_name
-        athena_workgroup = var.aws_athena.workgroup_name
-        glue_database    = var.aws_glue.database_name
+        glue_database    = var.glue_database_arn
         location         = var.s3_bucket.arn
       }
     })

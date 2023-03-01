@@ -8,7 +8,6 @@ This Terraform module provisions the necessary services to provide a data produc
 
 * Confluent Kafka
 * AWS S3
-* AWS Athena
 * AWS Glue
 * AWS Lambda
 
@@ -43,8 +42,6 @@ The module creates an RESTful endpoint via AWS lambda (e.g. https://xz9am9uu74.e
     "domain": "<data_product_domain>",
     "name": "<data_product_name>",
     "output": {
-        "athena_catalog": "<athena_catalog>",
-        "athena_workgroup": "<athena_workgroup>",
         "glue_database": "<glue_database>",
         "location": "arn:aws:s3:::<s3_bucket_name>"
     }

@@ -15,14 +15,6 @@ variable "confluent" {
   sensitive = true
 }
 
-variable "kafka_api_credentials" {
-  type = object({
-    api_key_id     = string
-    api_key_secret = string
-  })
-  sensitive = true
-}
-
 variable "kafka" {
   type = object({
     environment = object({
@@ -34,21 +26,12 @@ variable "kafka" {
       kind          = string
       rest_endpoint = string
     })
+    credentials = object({
+      api_key_id     = string
+      api_key_secret = string
+    })
   })
-}
-
-variable "aws_athena" {
-  type = object({
-    workgroup_name = string
-    catalog_name   = string
-  })
-}
-
-variable "aws_glue" {
-  type = object({
-    database_name  = string
-    catalog_id     = string
-  })
+  sensitive = true
 }
 
 variable "domain" {

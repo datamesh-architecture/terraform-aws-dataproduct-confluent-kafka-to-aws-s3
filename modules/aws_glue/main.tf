@@ -1,7 +1,11 @@
+resource "aws_glue_catalog_database" "aws_glue_catalog_database" {
+  name = var.glue_database_name
+}
+
 resource "aws_glue_schema" "aws_glue_schema" {
   count = length(var.product.input)
 
-  compatibility     = "DISABLED"
+  compatibility     = "NONE"
   data_format       = var.product.input[count.index].format
   schema_name       = "schema_${var.product.fqn}_${var.product.input[count.index].table_name}"
   schema_definition = file("${path.cwd}/${var.product.input[count.index].schema}")
@@ -10,8 +14,8 @@ resource "aws_glue_schema" "aws_glue_schema" {
 resource "aws_glue_catalog_table" "aws_glue_catalog_table_kafka" {
   count = length(var.product.input)
 
-  database_name = var.aws_glue.database_name
-  catalog_id    = var.aws_glue.catalog_id
+  database_name = aws_glue_catalog_database.aws_glue_catalog_database.name
+  catalog_id    = aws_glue_catalog_database.aws_glue_catalog_database.catalog_id
   name          = replace(var.product.input[count.index].table_name, "-", "_")
   description   = "Glue catalog table"
   table_type    = "EXTERNAL_TABLE"

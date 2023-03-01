@@ -13,16 +13,6 @@ variable "s3_bucket" {
   })
 }
 
-variable "aws_athena" {
-  type = object({
-    workgroup_name = string
-    catalog_name   = string
-  })
-}
-
-variable "aws_glue" {
-  type = object({
-    database_name  = string
-    catalog_tables = list(string)
-  })
+variable "glue_database_arn" {
+  type = string
 }

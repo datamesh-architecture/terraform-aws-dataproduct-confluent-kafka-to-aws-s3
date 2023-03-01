@@ -1,16 +1,13 @@
-variable "aws_glue" {
-  type = object({
-    database_name = string
-    catalog_id    = string
-  })
-}
-
 variable "s3_bucket" {
   type = object({
     bucket = string
     id     = string
     arn    = string
   })
+}
+
+variable "glue_database_name" {
+  type = string
 }
 
 variable "product" {

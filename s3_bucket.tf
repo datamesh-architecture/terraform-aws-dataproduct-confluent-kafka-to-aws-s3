@@ -1,6 +1,6 @@
 # S3 bucket to store the results of the (Athena) query execution
 resource "aws_s3_bucket" "aws_s3_bucket" {
-  bucket = var.s3_bucket_name
+  bucket = local.product_fqn
   force_destroy = true
 }
 
@@ -32,12 +32,12 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
     condition {
       test     = "StringEquals"
       variable = "aws:PrincipalArn"
-      values   = [ join(", ", [ for s in var.aws_account_ids : format("arn:aws:iam::%s:role/*", s) ]) ]
+      values   = [ join(", ", [ for s in var.output.grant_access : format("arn:aws:iam::%s:role/*", s) ]) ]
     }
 
     principals {
       type        = "AWS"
-      identifiers = [ join(", ", [ for s in var.aws_account_ids : format("arn:aws:iam::%s:root", s) ]) ]
+      identifiers = [ join(", ", [ for s in var.output.grant_access : format("arn:aws:iam::%s:root", s) ]) ]
     }
   }
 }

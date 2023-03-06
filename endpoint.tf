@@ -1,6 +1,6 @@
 locals {
   info_out_directory = "${path.root}/out_info"
-  info_out_archive   = "archive_${var.product.domain}_${var.product.name}-info.zip"
+  info_out_archive   = "archive_${var.domain}_${var.name}-info.zip"
 
   out_directory      = "${path.root}/out_archives"
 }
@@ -8,11 +8,11 @@ locals {
 resource "local_file" "lambda_info_to_s3" {
   content = templatefile("${path.module}/templates/info.js.tftpl", {
     response_message = jsonencode({
-      domain = var.product.domain
-      name   = var.product.name
+      domain = var.domain
+      name   = var.name
       output = {
-        glue_database    = var.glue_database_arn
-        location         = var.s3_bucket.arn
+        glue_database    = aws_glue_catalog_database.aws_glue_catalog_database.arn
+        location         = aws_s3_bucket.aws_s3_bucket.arn
       }
     })
   })
@@ -29,7 +29,7 @@ data "archive_file" "archive_info_to_s3" {
 }
 
 resource "aws_s3_object" "archive_info_to_s3_object" {
-  bucket = var.s3_bucket.bucket
+  bucket = aws_s3_bucket.aws_s3_bucket.bucket
 
   key    = "lambdas/${local.info_out_archive}"
   source = data.archive_file.archive_info_to_s3.output_path
@@ -49,15 +49,15 @@ data "aws_iam_policy_document" "lambda_assume" {
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name = "s3-lambda-execution-role-${var.product.domain}-${var.product.name}"
+  name = "s3-lambda-execution-role-${var.domain}-${var.name}"
 
   assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
 }
 
 resource "aws_lambda_function" "lambda_info" {
-  function_name     = "${var.product.domain}_${var.product.name}_info"
+  function_name     = "${var.domain}_${var.name}_info"
 
-  s3_bucket         = var.s3_bucket.bucket
+  s3_bucket         = aws_s3_bucket.aws_s3_bucket.bucket
   s3_key            = aws_s3_object.archive_info_to_s3_object.key
   s3_object_version = aws_s3_object.archive_info_to_s3_object.version_id
 
@@ -69,7 +69,7 @@ resource "aws_lambda_function" "lambda_info" {
 }
 
 resource "aws_apigatewayv2_api" "lambda_info" {
-  name          = "${var.product.domain}_${var.product.name}_info"
+  name          = "${var.domain}_${var.name}_info"
   protocol_type = "HTTP"
 }
 

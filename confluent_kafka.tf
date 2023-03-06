@@ -1,3 +1,7 @@
+locals {
+  kafka_topics = [ for input in var.input: input.topic ]
+}
+
 resource "confluent_service_account" "app-consumer" {
   display_name = "app-consumer"
   description  = "Service account to consume from 'var.kafka_topics[0]' topic of 'var.kafka.cluster.id' Kafka cluster"
@@ -24,13 +28,13 @@ resource "confluent_api_key" "app-consumer-kafka-api-key" {
 }
 
 resource "confluent_kafka_acl" "app-producer-write-on-topic" {
-  count = length(var.kafka_topics)
+  count = length(local.kafka_topics)
 
   kafka_cluster {
     id = var.kafka.cluster.id
   }
   resource_type = "TOPIC"
-  resource_name = var.kafka_topics[count.index]
+  resource_name = local.kafka_topics[count.index]
   pattern_type  = "LITERAL"
   principal     = "User:${confluent_service_account.app-producer.id}"
   host          = "*"
@@ -73,13 +77,13 @@ resource "confluent_api_key" "app-producer-kafka-api-key" {
 // confluent_kafka_acl.app-consumer-read-on-topic, confluent_kafka_acl.app-consumer-read-on-group.
 // https://docs.confluent.io/platform/current/kafka/authorization.html#using-acls
 resource "confluent_kafka_acl" "app-consumer-read-on-topic" {
-  count = length(var.kafka_topics)
+  count = length(local.kafka_topics)
 
   kafka_cluster {
     id = var.kafka.cluster.id
   }
   resource_type = "TOPIC"
-  resource_name = var.kafka_topics[count.index]
+  resource_name = local.kafka_topics[count.index]
   pattern_type  = "LITERAL"
   principal     = "User:${confluent_service_account.app-consumer.id}"
   host          = "*"
@@ -138,13 +142,13 @@ resource "confluent_kafka_acl" "app-connector-describe-on-cluster" {
 }
 
 resource "confluent_kafka_acl" "app-connector-read-on-target-topic" {
-  count = length(var.kafka_topics)
+  count = length(local.kafka_topics)
 
   kafka_cluster {
     id = var.kafka.cluster.id
   }
   resource_type = "TOPIC"
-  resource_name = var.kafka_topics[count.index]
+  resource_name = local.kafka_topics[count.index]
   pattern_type  = "LITERAL"
   principal     = "User:${confluent_service_account.app-connector.id}"
   host          = "*"
@@ -301,9 +305,9 @@ resource "confluent_connector" "sink" {
   // Block for custom *nonsensitive* configuration properties that are *not* labelled with "Type: password" under "Configuration Properties" section in the docs:
   // https://docs.confluent.io/cloud/current/connectors/cc-s3-sink.html#configuration-properties
   config_nonsensitive = {
-    "topics"                   = join(", ", var.kafka_topics)
+    "topics"                   = join(", ", local.kafka_topics)
     "input.data.format"        = "JSON"
-    "s3.bucket.name"           = var.s3_bucket
+    "s3.bucket.name"           = aws_s3_bucket.aws_s3_bucket.bucket
     "connector.class"          = "S3_SINK"
     "name"                     = "S3_SINKConnector_0"
     "kafka.auth.mode"          = "SERVICE_ACCOUNT"

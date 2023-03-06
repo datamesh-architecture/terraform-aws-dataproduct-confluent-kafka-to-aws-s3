@@ -69,8 +69,9 @@ Examples, how to use this module, can be found in a separate [GitHub repository]
 
 ## Authors
 
-Module is maintained by []().
+This terraform module is maintained by [Andre Deuerling](https://www.innoq.com/en/staff/andre-deuerling/), [Jochen Christ](https://www.innoq.com/en/staff/jochen-christ/), and [Simon Harrer](https://www.innoq.com/en/staff/dr-simon-harrer/).
 
 ## License
 
-MIT License Licensed. See [LICENSE](https://github.com/datamesh-architecture/terraform-datamesh-dataproduct-confluent-kafka-to-aws-s3/blob/main/LICENSE) for full details.
+MIT License.
+

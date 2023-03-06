@@ -2,7 +2,7 @@
 
 This Terraform module provisions the necessary services to provide a data product on AWS.
 
-![Overview](assets/images/overview.png)
+![Overview](https://www.datamesh-architecture.com/images/terraform-dataproduct-confluent-kafka-to-aws-s3.png)
 
 ## Services
 

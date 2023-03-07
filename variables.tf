@@ -5,6 +5,7 @@ variable "aws" {
     secret_key = string
   })
   sensitive = true
+  description = "AWS related information and credentials"
 }
 
 variable "confluent" {
@@ -13,6 +14,7 @@ variable "confluent" {
     cloud_api_secret = string
   })
   sensitive = true
+  description = "Confluent (Cloud) related credentials"
 }
 
 variable "kafka" {
@@ -32,6 +34,7 @@ variable "kafka" {
     })
   })
   sensitive = true
+  description = "Information and credentials about/from the Kafka cluster"
 }
 
 variable "domain" {
@@ -54,8 +57,8 @@ variable "input" {
   description = <<EOT
 topic: Name of the Kafka topic which should be processed
 format: Currently only 'JSON' is supported
-table_name: Name of the (data catalog) table, where data is stored
-schema: Path to the schema which describes the messages received from Kafka
+table_name: Name of the data catalog table, where data is stored
+schema: Path to the JSON schema file which describes the messages received from Kafka and the table within the data catalog
 EOT
 }
 

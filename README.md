@@ -33,6 +33,23 @@ module "kafka_to_s3" {
 }
 ```
 
+Additionally, it's necessary to configure credentials for AWS and Confluent Cloud. This can be done in a separate file `terraform.tfvars` with the following content:
+
+```hcl
+aws = {
+  region = "REGION"
+  access_key = "ACCESS_KEY"
+  secret_key = "SECRET_KEY"
+}
+
+confluent = {
+  cloud_api_key    = "CLOUD_API_KEY"
+  cloud_api_secret = "CLOUD_API_SECRET"
+}
+```
+
+The specified credentials can then be referenced and forwarded in the other *.tf files. 
+
 ## Endpoint data
 
 The module creates an RESTful endpoint via AWS lambda (e.g. https://xz9am9uu74.execute-api.eu-central-1.amazonaws.com/prod/). This endpoint can be used as an input for another data product or to retrieve information about this data product.

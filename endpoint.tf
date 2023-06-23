@@ -61,7 +61,7 @@ resource "aws_lambda_function" "lambda_info" {
   s3_key            = aws_s3_object.archive_info_to_s3_object.key
   s3_object_version = aws_s3_object.archive_info_to_s3_object.version_id
 
-  runtime           = "nodejs12.x"
+  runtime           = "nodejs18.x"
   handler           = "lambda_function.handler"
   source_code_hash  = data.archive_file.archive_info_to_s3.output_base64sha256
 
